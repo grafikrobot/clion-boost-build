@@ -1,0 +1,149 @@
+// Copyright Rene Rivera 2015
+// Distributed under the Boost Software License, Version 1.0.
+// (See accompanying file LICENSE_1_0.txt or copy at
+// http://www.boost.org/LICENSE_1_0.txt)
+
+{
+    parserClass="org.boost.build.parser.BBParser"
+
+    extends="com.intellij.extapi.psi.ASTWrapperPsiElement"
+
+    psiClassPrefix="BB"
+    psiImplClassSuffix="Impl"
+    psiPackage="org.boost.build.psi"
+    psiImplPackage="org.boost.build.psi.impl"
+
+    elementTypeHolderClass="org.boost.build.psi.BBTypes"
+    elementTypeClass="org.boost.build.psi.BBElementType"
+    tokenTypeClass="org.boost.build.psi.BBTokenType"
+
+    psiImplUtilClass="org.boost.build.psi.impl.SimplePsiImplUtil"
+}
+
+bbLangFile ::= item_*
+
+private item_ ::= run | COMMENT
+
+run ::= rules
+
+/*
+ * block - zero or more rules
+ * rules - one or more rules
+ * rule - any one of jam's rules
+ */
+
+block ::= rules?
+
+rules ::= rule+ | LOCAL list assign_list_opt SEMIC block
+
+assign_list_opt ::= ( EQUALS list )?
+
+arglist_opt ::= ( LPAREN lol RPAREN )?
+
+local_opt ::= LOCAL?
+
+rule ::=
+    LBRACE block RBRACE
+    | INCLUDE list SEMIC
+    | ARG lol SEMIC
+    | arg assign list SEMIC
+    | arg ON list assign list SEMIC
+    | RETURN list SEMIC
+    | BREAK SEMIC
+    | CONTINUE SEMIC
+    | FOR local_opt ARG IN list LBRACE block RBRACE
+    | SWITCH list LBRACE cases RBRACE
+    | IF expr LBRACE block RBRACE
+    | MODULE list LBRACE block RBRACE
+    | CLASS lol LBRACE block RBRACE
+    | WHILE expr LBRACE block RBRACE
+    | IF expr LBRACE block RBRACE ELSE rule
+    | local_opt RULE ARG arglist_opt rule
+    | ON arg rule
+    | ACTIONS eflags ARG bindlist? LBRACE STRING RBRACE
+
+/*
+ * assign - = += ?= or default =
+ */
+
+assign ::=
+    EQUALS
+    | PLUS_EQUALS
+    | QUESTION_EQUALS
+    | DEFAULT EQUALS
+
+/*
+ * expr - an expression for if
+ */
+
+expr ::=
+    arg
+    | arg EQUALS expr
+    | arg BANG_EQUALS expr
+    | arg LANGLE expr
+    | arg LANGLE_EQUALS expr
+    | arg RANGLE expr
+    | arg RANGLE_EQUALS expr
+    | arg AMPER expr
+    | arg AMPERAMPER expr
+    | arg BAR expr
+    | arg BARBAR expr
+    | arg IN list
+    | BANG expr
+    | LPAREN expr RPAREN
+
+/*
+ * cases - action elements inside a 'switch'
+ * case - a single action element inside a 'switch'
+ * right-recursive rule so cases can be examined in order.
+ */
+
+cases ::= case_clause*
+
+case_clause ::= CASE ARG COLON block
+
+/*
+ * lol - list of lists
+ * right-recursive rule so that lists can be added in order.
+ */
+
+lol	::= list ( COLON list )*
+
+/*
+ * list - zero or more args in a LIST
+ * arg - one ARG or function call
+ */
+
+list ::= arg*
+
+arg	::= ARG	| LBRACKET func RBRACKET
+
+/*
+ * func - a function call (inside [])
+ * This needs to be split cleanly out of 'rule'
+ */
+
+func ::= ARG lol
+    | ON arg ARG lol
+    | ON arg RETURN list
+
+/*
+ * eflags - zero or more modifiers to 'executes'
+ * eflag - a single modifier to 'executes'
+ */
+
+eflags ::= eflag*
+
+eflag ::=
+    UPDATED
+    | TOGETHER
+    | IGNORE
+    | QUIETLY
+    | PIECEMEAL
+    | EXISTING
+
+/*
+ * bindlist - list of variable to bind for an action
+ */
+
+bindlist ::= BIND ARG+
