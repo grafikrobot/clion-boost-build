@@ -1,8 +1,3 @@
-// Copyright Rene Rivera 2015
-// Distributed under the Boost Software License, Version 1.0.
-// (See accompanying file LICENSE_1_0.txt or copy at
-// http://www.boost.org/LICENSE_1_0.txt)
-
 // This is a generated file. Not intended for manual editing.
 package org.boost.build.psi;
 
@@ -12,19 +7,7 @@ import com.intellij.psi.PsiElement;
 
 public class BBVisitor extends PsiElementVisitor {
 
-  public void visitArg(@NotNull BBArg o) {
-    visitPsiElement(o);
-  }
-
-  public void visitArglistOpt(@NotNull BBArglistOpt o) {
-    visitPsiElement(o);
-  }
-
   public void visitAssign(@NotNull BBAssign o) {
-    visitPsiElement(o);
-  }
-
-  public void visitAssignListOpt(@NotNull BBAssignListOpt o) {
     visitPsiElement(o);
   }
 
@@ -44,6 +27,10 @@ public class BBVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitCompare(@NotNull BBCompare o) {
+    visitPsiElement(o);
+  }
+
   public void visitEflag(@NotNull BBEflag o) {
     visitPsiElement(o);
   }
@@ -60,11 +47,11 @@ public class BBVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitList(@NotNull BBList o) {
+  public void visitKeyword(@NotNull BBKeyword o) {
     visitPsiElement(o);
   }
 
-  public void visitLocalOpt(@NotNull BBLocalOpt o) {
+  public void visitList(@NotNull BBList o) {
     visitPsiElement(o);
   }
 
@@ -72,15 +59,75 @@ public class BBVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitRule(@NotNull BBRule o) {
-    visitPsiElement(o);
-  }
-
-  public void visitRules(@NotNull BBRules o) {
-    visitPsiElement(o);
-  }
-
   public void visitRun(@NotNull BBRun o) {
+    visitPsiElement(o);
+  }
+
+  public void visitStatement(@NotNull BBStatement o) {
+    visitPsiElement(o);
+  }
+
+  public void visitStatementActions(@NotNull BBStatementActions o) {
+    visitPsiElement(o);
+  }
+
+  public void visitStatementAssign(@NotNull BBStatementAssign o) {
+    visitPsiElement(o);
+  }
+
+  public void visitStatementBreak(@NotNull BBStatementBreak o) {
+    visitPsiElement(o);
+  }
+
+  public void visitStatementCall(@NotNull BBStatementCall o) {
+    visitPsiElement(o);
+  }
+
+  public void visitStatementClass(@NotNull BBStatementClass o) {
+    visitPsiElement(o);
+  }
+
+  public void visitStatementContinue(@NotNull BBStatementContinue o) {
+    visitPsiElement(o);
+  }
+
+  public void visitStatementDefine(@NotNull BBStatementDefine o) {
+    visitPsiElement(o);
+  }
+
+  public void visitStatementFor(@NotNull BBStatementFor o) {
+    visitPsiElement(o);
+  }
+
+  public void visitStatementIf(@NotNull BBStatementIf o) {
+    visitPsiElement(o);
+  }
+
+  public void visitStatementInclude(@NotNull BBStatementInclude o) {
+    visitPsiElement(o);
+  }
+
+  public void visitStatementModule(@NotNull BBStatementModule o) {
+    visitPsiElement(o);
+  }
+
+  public void visitStatementReturn(@NotNull BBStatementReturn o) {
+    visitPsiElement(o);
+  }
+
+  public void visitStatementScope(@NotNull BBStatementScope o) {
+    visitPsiElement(o);
+  }
+
+  public void visitStatementSwitch(@NotNull BBStatementSwitch o) {
+    visitPsiElement(o);
+  }
+
+  public void visitStatementWhile(@NotNull BBStatementWhile o) {
+    visitPsiElement(o);
+  }
+
+  public void visitVal(@NotNull BBVal o) {
     visitPsiElement(o);
   }
 

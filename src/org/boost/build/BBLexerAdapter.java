@@ -11,6 +11,6 @@ import java.io.Reader;
 public class BBLexerAdapter extends FlexAdapter
 {
     public BBLexerAdapter() {
-        super(new BBLexer((Reader) null));
+        super(new BBLexerBase((Reader) null));
     }
 }

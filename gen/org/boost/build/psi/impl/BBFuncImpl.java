@@ -1,8 +1,3 @@
-// Copyright Rene Rivera 2015
-// Distributed under the Boost Software License, Version 1.0.
-// (See accompanying file LICENSE_1_0.txt or copy at
-// http://www.boost.org/LICENSE_1_0.txt)
-
 // This is a generated file. Not intended for manual editing.
 package org.boost.build.psi.impl;
 
@@ -22,15 +17,13 @@ public class BBFuncImpl extends ASTWrapperPsiElement implements BBFunc {
     super(node);
   }
 
-  public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof BBVisitor) ((BBVisitor)visitor).visitFunc(this);
-    else super.accept(visitor);
+  public void accept(@NotNull BBVisitor visitor) {
+    visitor.visitFunc(this);
   }
 
-  @Override
-  @Nullable
-  public BBArg getArg() {
-    return findChildByClass(BBArg.class);
+  public void accept(@NotNull PsiElementVisitor visitor) {
+    if (visitor instanceof BBVisitor) accept((BBVisitor)visitor);
+    else super.accept(visitor);
   }
 
   @Override
@@ -43,6 +36,12 @@ public class BBFuncImpl extends ASTWrapperPsiElement implements BBFunc {
   @Nullable
   public BBLol getLol() {
     return findChildByClass(BBLol.class);
+  }
+
+  @Override
+  @Nullable
+  public BBVal getVal() {
+    return findChildByClass(BBVal.class);
   }
 
 }

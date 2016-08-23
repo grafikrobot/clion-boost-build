@@ -15,17 +15,22 @@ import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.TokenType;
+import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.IFileElementType;
 import com.intellij.psi.tree.TokenSet;
+import org.boost.build.psi.BBTokenType;
 import org.jetbrains.annotations.NotNull;
 import org.boost.build.parser.BBParser;
 import org.boost.build.psi.BBFile;
-import org.boost.build.psi.BBTypes;
+
+import static org.boost.build.psi.BBTypes.*;
 
 public class BBParserDefinition implements ParserDefinition
 {
+    public static final IElementType COMMENT = new BBTokenType("BB_COMMENT");
+
     public static final TokenSet WHITE_SPACES = TokenSet.create(TokenType.WHITE_SPACE);
-    public static final TokenSet COMMENTS = TokenSet.create(BBTypes.COMMENT);
+    public static final TokenSet COMMENTS = TokenSet.create(COMMENT);
 
     public static final IFileElementType FILE = new IFileElementType(Language.<BBLanguage>findInstance(BBLanguage.class));
 
@@ -70,6 +75,6 @@ public class BBParserDefinition implements ParserDefinition
 
     @NotNull
     public PsiElement createElement(ASTNode node) {
-        return BBTypes.Factory.createElement(node);
+        return Factory.createElement(node);
     }
 }

@@ -1,8 +1,3 @@
-// Copyright Rene Rivera 2015
-// Distributed under the Boost Software License, Version 1.0.
-// (See accompanying file LICENSE_1_0.txt or copy at
-// http://www.boost.org/LICENSE_1_0.txt)
-
 // This is a generated file. Not intended for manual editing.
 package org.boost.build.psi.impl;
 
@@ -16,21 +11,31 @@ import static org.boost.build.psi.BBTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import org.boost.build.psi.*;
 
-public class BBArglistOptImpl extends ASTWrapperPsiElement implements BBArglistOpt {
+public class BBStatementAssignImpl extends ASTWrapperPsiElement implements BBStatementAssign {
 
-  public BBArglistOptImpl(ASTNode node) {
+  public BBStatementAssignImpl(ASTNode node) {
     super(node);
   }
 
+  public void accept(@NotNull BBVisitor visitor) {
+    visitor.visitStatementAssign(this);
+  }
+
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof BBVisitor) ((BBVisitor)visitor).visitArglistOpt(this);
+    if (visitor instanceof BBVisitor) accept((BBVisitor)visitor);
     else super.accept(visitor);
   }
 
   @Override
   @Nullable
-  public BBLol getLol() {
-    return findChildByClass(BBLol.class);
+  public BBAssign getAssign() {
+    return findChildByClass(BBAssign.class);
+  }
+
+  @Override
+  @Nullable
+  public BBList getList() {
+    return findChildByClass(BBList.class);
   }
 
 }

@@ -16,15 +16,7 @@
 
   <!-- please see https://confluence.jetbrains.com/display/IDEADEV/Plugin+Compatibility+with+IntelliJ+Platform+Products
        on how to target different products -->
-  <!-- uncomment to enable plugin in all products
-  <depends>com.intellij.modules.lang</depends>
-  -->
-
-  <extensions defaultExtensionNs="com.intellij">
-    <!-- Add your extensions here -->
-    <fileTypeFactory implementation="org.boost.build.BBFileTypeFactory"/>
-    <lang.parserDefinition language="Boost.Build" implementationClass="org.boost.build.BBParserDefinition"/>
-  </extensions>
+  <depends>com.intellij.modules.clion</depends>
 
   <application-components>
     <!-- Add your application components here -->
@@ -37,5 +29,13 @@
   <actions>
     <!-- Add your actions here -->
   </actions>
+
+  <extensions defaultExtensionNs="com.intellij">
+    <!-- Add your extensions here -->
+    <fileTypeFactory implementation="org.boost.build.BBFileTypeFactory"/>
+    <lang.parserDefinition language="Boost.Build" implementationClass="org.boost.build.BBParserDefinition"/>
+    <lang.syntaxHighlighterFactory key="Boost.Build" language="Boost.Build" implementationClass="org.boost.build.BBSyntaxHighlighterFactory"/>
+    <colorSettingsPage implementation="org.boost.build.BBColorSettingsPage"/>
+  </extensions>
 
 </idea-plugin>

@@ -1,8 +1,3 @@
-// Copyright Rene Rivera 2015
-// Distributed under the Boost Software License, Version 1.0.
-// (See accompanying file LICENSE_1_0.txt or copy at
-// http://www.boost.org/LICENSE_1_0.txt)
-
 // This is a generated file. Not intended for manual editing.
 package org.boost.build.psi.impl;
 
@@ -22,27 +17,37 @@ public class BBExprImpl extends ASTWrapperPsiElement implements BBExpr {
     super(node);
   }
 
+  public void accept(@NotNull BBVisitor visitor) {
+    visitor.visitExpr(this);
+  }
+
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof BBVisitor) ((BBVisitor)visitor).visitExpr(this);
+    if (visitor instanceof BBVisitor) accept((BBVisitor)visitor);
     else super.accept(visitor);
   }
 
   @Override
   @Nullable
-  public BBArg getArg() {
-    return findChildByClass(BBArg.class);
+  public BBCompare getCompare() {
+    return findChildByClass(BBCompare.class);
   }
 
   @Override
-  @Nullable
-  public BBExpr getExpr() {
-    return findChildByClass(BBExpr.class);
+  @NotNull
+  public List<BBExpr> getExprList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, BBExpr.class);
   }
 
   @Override
   @Nullable
   public BBList getList() {
     return findChildByClass(BBList.class);
+  }
+
+  @Override
+  @Nullable
+  public BBVal getVal() {
+    return findChildByClass(BBVal.class);
   }
 
 }

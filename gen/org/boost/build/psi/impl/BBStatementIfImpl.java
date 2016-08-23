@@ -1,8 +1,3 @@
-// Copyright Rene Rivera 2015
-// Distributed under the Boost Software License, Version 1.0.
-// (See accompanying file LICENSE_1_0.txt or copy at
-// http://www.boost.org/LICENSE_1_0.txt)
-
 // This is a generated file. Not intended for manual editing.
 package org.boost.build.psi.impl;
 
@@ -16,21 +11,37 @@ import static org.boost.build.psi.BBTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import org.boost.build.psi.*;
 
-public class BBArgImpl extends ASTWrapperPsiElement implements BBArg {
+public class BBStatementIfImpl extends ASTWrapperPsiElement implements BBStatementIf {
 
-  public BBArgImpl(ASTNode node) {
+  public BBStatementIfImpl(ASTNode node) {
     super(node);
   }
 
+  public void accept(@NotNull BBVisitor visitor) {
+    visitor.visitStatementIf(this);
+  }
+
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof BBVisitor) ((BBVisitor)visitor).visitArg(this);
+    if (visitor instanceof BBVisitor) accept((BBVisitor)visitor);
     else super.accept(visitor);
   }
 
   @Override
+  @NotNull
+  public BBBlock getBlock() {
+    return findNotNullChildByClass(BBBlock.class);
+  }
+
+  @Override
+  @NotNull
+  public BBExpr getExpr() {
+    return findNotNullChildByClass(BBExpr.class);
+  }
+
+  @Override
   @Nullable
-  public BBFunc getFunc() {
-    return findChildByClass(BBFunc.class);
+  public BBStatement getStatement() {
+    return findChildByClass(BBStatement.class);
   }
 
 }
