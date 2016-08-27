@@ -1,3 +1,8 @@
+// Copyright Rene Rivera 2015-2016
+// Distributed under the Boost Software License, Version 1.0.
+// (See accompanying file LICENSE_1_0.txt or copy at
+// http://www.boost.org/LICENSE_1_0.txt)
+
 package org.boost.build;
 
 import com.intellij.lexer.Lexer;
@@ -13,7 +18,7 @@ import java.util.HashMap;
 import java.util.Map;
 import static com.intellij.openapi.editor.colors.TextAttributesKey.createTextAttributesKey;
 
-public class BBSyntaxHighlighter extends SyntaxHighlighterBase {
+public class BBSyntaxHighlighter extends SyntaxHighlighterBase implements BBSyntaxColors {
     private static final Map<IElementType, TextAttributesKey> ATTRIBUTES = new HashMap<>();
     protected static void fillMap(
             Map<IElementType, TextAttributesKey> attributes,
@@ -21,20 +26,24 @@ public class BBSyntaxHighlighter extends SyntaxHighlighterBase {
             TextAttributesKey color,
             IElementType... types)
     {
-        TextAttributesKey v = createTextAttributesKey(externalName, color);
-        for (int i = 0; i < types.length; ++i)
-        {
-            attributes.put(types[i], v);
-        }
+        fillMap(attributes, createTextAttributesKey(externalName, color), types);
     }
     static {
-        fillMap(ATTRIBUTES,
-                "BB_COMMENT", DefaultLanguageHighlighterColors.LINE_COMMENT,
+        fillMap(ATTRIBUTES, ACTION_STRING_COLOR,
+                BBTypes.STRING);
+        fillMap(ATTRIBUTES, BRACES_COLOR,
+                BBTypes.LBRACE, BBTypes.RBRACE);
+        fillMap(ATTRIBUTES, BRACKETS_COLOR,
+                BBTypes.LBRACKET, BBTypes.RBRACKET);
+        fillMap(ATTRIBUTES, CALL_RULE_COLOR,
+                BBTypes.FUNC);
+        fillMap(ATTRIBUTES, COLON_COLOR,
+                BBTypes.COLON);
+        fillMap(ATTRIBUTES, COMMENT_COLOR,
                 BBParserDefinition.COMMENT);
-        fillMap(ATTRIBUTES,
-                "BB_PAREN", DefaultLanguageHighlighterColors.PARENTHESES,
-                BBTypes.LPAREN, BBTypes.RPAREN);
-        fillMap(ATTRIBUTES, "BB_KEYWORD", DefaultLanguageHighlighterColors.KEYWORD,
+        fillMap(ATTRIBUTES, COMPARE_COLOR,
+                BBTypes.COMPARE);
+        fillMap(ATTRIBUTES, KEYWORD_COLOR,
                 BBTypes.ACTIONS,
                 BBTypes.BIND,
                 BBTypes.BREAK,
@@ -55,18 +64,10 @@ public class BBSyntaxHighlighter extends SyntaxHighlighterBase {
                 BBTypes.RULE,
                 BBTypes.SWITCH,
                 BBTypes.WHILE);
-        fillMap(ATTRIBUTES,
-                "BB_STRING", DefaultLanguageHighlighterColors.STRING,
-                BBTypes.STRING);
-        fillMap(ATTRIBUTES,
-                "BB_BRACES", DefaultLanguageHighlighterColors.BRACES,
-                BBTypes.LBRACE, BBTypes.RBRACE);
-        fillMap(ATTRIBUTES,
-                "BB_BRACKETS", DefaultLanguageHighlighterColors.BRACKETS,
-                BBTypes.LBRACKET, BBTypes.RBRACKET);
-        fillMap(ATTRIBUTES,
-                "BB_FUNC", DefaultLanguageHighlighterColors.FUNCTION_CALL,
-                BBTypes.FUNC);
+        fillMap(ATTRIBUTES, PARENTHESES_COLOR,
+                BBTypes.LPAREN, BBTypes.RPAREN);
+        fillMap(ATTRIBUTES, SEMICCOLON_COLOR,
+                BBTypes.SEMIC);
     }
 
     @NotNull
