@@ -11,5 +11,5 @@ import javax.swing.*;
 
 public class BBIcons
 {
-    public static final Icon FILE = IconLoader.getIcon("/org/boost/build/icons/boost-icon-small.png");
+    public static final Icon FILE = IconLoader.getIcon("/icons/boost-icon-small.png");
 }
