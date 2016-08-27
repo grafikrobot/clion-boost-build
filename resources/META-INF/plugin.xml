@@ -1,0 +1,59 @@
+<!--
+Copyright Rene Rivera 2015-2016
+Distributed under the Boost Software License, Version 1.0.
+(See accompanying file LICENSE_1_0.txt or copy at
+http://www.boost.org/LICENSE_1_0.txt)
+-->
+<idea-plugin version="2">
+  <id>org.boost.build.unique.plugin.id</id>
+  <name>Boost.Build</name>
+  <version>0.1</version>
+  <vendor email="grafikrobot@gmail.com" url="http://www.boost.org/">Boost C++ Libraries</vendor>
+
+  <description><![CDATA[
+Support for Boost Build v2 build system for building C++ projects with CLion.
+Currently includes the following features:
+<ul>
+<li>Bjam language editor support with syntax highlighting.</li>
+</ul>
+    ]]></description>
+
+  <change-notes><![CDATA[
+<b>0.1 - Initial</b>
+<ul>
+<li>Basic Bjam language lexer and parser.</li>
+<li>Editor color settings page.</li>
+<li>Some basic Bjam language annotations.</li>
+</ul>
+    ]]>
+  </change-notes>
+
+  <!-- please see https://confluence.jetbrains.com/display/IDEADEV/Build+Number+Ranges for description -->
+  <idea-version since-build="131"/>
+
+  <!-- please see https://confluence.jetbrains.com/display/IDEADEV/Plugin+Compatibility+with+IntelliJ+Platform+Products
+       on how to target different products -->
+  <depends>com.intellij.modules.clion</depends>
+
+  <application-components>
+    <!-- Add your application components here -->
+  </application-components>
+
+  <project-components>
+    <!-- Add your project components here -->
+  </project-components>
+
+  <actions>
+    <!-- Add your actions here -->
+  </actions>
+
+  <extensions defaultExtensionNs="com.intellij">
+    <!-- Add your extensions here -->
+    <fileTypeFactory implementation="org.boost.build.BBFileTypeFactory"/>
+    <lang.parserDefinition language="Boost.Build" implementationClass="org.boost.build.language.BBParserDefinition"/>
+    <lang.syntaxHighlighterFactory key="Boost.Build" language="Boost.Build" implementationClass="org.boost.build.language.BBSyntaxHighlighterFactory"/>
+    <colorSettingsPage implementation="org.boost.build.language.BBColorSettingsPage"/>
+    <annotator language="Boost.Build" implementationClass="org.boost.build.language.BBAnnotator"/>
+  </extensions>
+
+</idea-plugin>

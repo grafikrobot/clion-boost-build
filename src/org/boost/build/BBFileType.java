@@ -6,6 +6,7 @@
 package org.boost.build;
 
 import com.intellij.openapi.fileTypes.LanguageFileType;
+import org.boost.build.language.BBLanguage;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
