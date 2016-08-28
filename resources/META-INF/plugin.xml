@@ -54,6 +54,7 @@ Currently includes the following features:
     <lang.syntaxHighlighterFactory key="Boost.Build" language="Boost.Build" implementationClass="org.boost.build.language.BBSyntaxHighlighterFactory"/>
     <colorSettingsPage implementation="org.boost.build.language.BBColorSettingsPage"/>
     <annotator language="Boost.Build" implementationClass="org.boost.build.language.BBAnnotator"/>
+    <lang.braceMatcher language="Boost.Build" implementationClass="org.boost.build.language.BBBraceMatcher"/>
   </extensions>
 
 </idea-plugin>
